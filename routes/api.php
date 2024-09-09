@@ -3,20 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\TodoController;
-// use App\Http\Middleware\CheckAdmin;
-
-
-
-Route::get('/', function () {
-    return redirect('/login');
-});
-
-// LOGIN
-Route::post('/login', [AuthController::class, 'login']);
-Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
-Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
-Route::post('/register', [AuthController::class, 'register'])->name('register-form');
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::middleware('auth')->group(function () {
 
@@ -37,3 +23,5 @@ Route::middleware('auth')->group(function () {
     });
 
 });
+
+?>

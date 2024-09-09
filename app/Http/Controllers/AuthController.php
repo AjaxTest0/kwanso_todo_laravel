@@ -121,8 +121,8 @@ class AuthController extends Controller
             $token->expiry = Carbon::now()->addHours(24);
             $token->is_used = false;
             $token->save();
-            $msg = 'Token has been Created successfully.';
             $Usertoken = $token->token;
+            $msg = 'Token has been updated successfully.';
         } else {
             $Usertoken = Str::random(60);
             Token::create([
@@ -131,7 +131,7 @@ class AuthController extends Controller
                 'token' => $Usertoken,
                 'is_used' => false,
             ]);
-            $msg = 'Token has been updated successfully.';
+            $msg = 'Token has been Created successfully.';
         }
 
         return redirect()->back()->with('success', $msg);

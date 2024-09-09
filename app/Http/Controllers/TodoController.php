@@ -25,6 +25,7 @@ class TodoController extends Controller
         if ($status) {
             $todos = $todos->where('status', $status);
         }
+        // For sql injection
         $pattern = '/^[a-zA-Z\s]+$/';
 
         if ($search  && preg_match($pattern, $search)) {
@@ -36,7 +37,7 @@ class TodoController extends Controller
             });
         }
 
-        $todos = $todos->orderBy('id');
+        $todos = $todos->orderBy('status', 'asc')->orderBy('id', 'desc');
 
         if ($user->is_admin) {
             $todos = $todos->with('user')->get();

@@ -27,13 +27,14 @@
                     <a class="nav-link" href="{{ route('register') }}">Register</a>
                 </li>
                 @endguest
+
                 @auth
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('todos.index') }}">Todo Listing</a>
                 </li>
                 @if(auth()->user()->is_admin)
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('generate') }}">Generate Token</a>
+                    <a class="nav-link" href="{{ route('generate.view') }}">Generate Token</a>
                 </li>
                 @endif
                 <li class="nav-item">
