@@ -40,9 +40,9 @@ class TodoController extends Controller
         $todos = $todos->orderBy('status', 'asc')->orderBy('id', 'desc');
 
         if ($user->is_admin) {
-            $todos = $todos->with('user')->get();
+            $todos = $todos->with('user')->paginate(10);
         } else {
-            $todos = $todos->where('user_id', $user->id)->get();
+            $todos = $todos->where('user_id', $user->id)->paginate(10);
         }
 
         return view('todos.index', compact('todos'));

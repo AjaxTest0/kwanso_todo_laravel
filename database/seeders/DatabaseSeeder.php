@@ -15,19 +15,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // Todo::factory(50)->create();
-        User::factory(50)->create();
+        User::create([
+            'name' => 'Admin User',
+            'email' => 'admin@example.com',
+            'password' => Hash::make('password123'),
+            'role' => 'ADMIN',
+        ]);
 
-        // User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
-
-        // User::create([
-        //     'name' => 'Admin User',
-        //     'email' => 'admin@example.com',
-        //     'password' => Hash::make('password123'),
-        //     'role' => 'ADMIN',
-        // ]);
+        User::factory(10)->create();
+        Todo::factory(100)->create();
     }
 }

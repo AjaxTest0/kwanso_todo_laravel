@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\TodoController;
+use App\Actions\TokenManagementAction;
 
 Route::middleware('auth')->group(function () {
 
@@ -16,11 +17,14 @@ Route::middleware('auth')->group(function () {
         Route::get('/{todo}', [TodoController::class, 'destroy'])->name('delete');
     });
 
-    // GENERATE Routes
-    Route::prefix('generate')->name('generate.')->group(function () {
-        Route::get('/', [AuthController::class, 'generateTokenView'])->name('view');
-        Route::post('/token', [AuthController::class, 'generateToken'])->name('token');
-    });
+    // // GENERATE Routes
+    // Route::prefix('generate')->name('generate.')->group(function () {
+    //     Route::get('/', [AuthController::class, 'generateTokenView'])->name('view');
+    //     Route::post('/token', [AuthController::class, 'generateToken'])->name('token');
+    // });
+
+
+    Route::match(['get', 'post'], '/token-management', [TokenManagementAction::class, 'handle']);
 
 });
 

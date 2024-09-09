@@ -22,8 +22,8 @@
 
                 <div class="col-5">
                     <div class="form-group">
-                        <input type="text" id="search" name="search" class="form-control" placeholder="Search user by name"
-                            value="{{ request('search') }}">
+                        <input type="text" id="search" name="search" class="form-control"
+                            placeholder="Search user by name" value="{{ request('search') }}">
                     </div>
                 </div>
 
@@ -74,6 +74,34 @@
                 @endforeach
             </tbody>
         </table>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                @if ($todos->onFirstPage())
+                <li class="page-item disabled">
+                    <span class="page-link">Previous</span>
+                </li>
+                @else
+                <li class="page-item">
+                    <a class="page-link" href="{{ $todos->previousPageUrl() }}">Previous</a>
+                </li>
+                @endif
+                @for ($i = 1; $i <= $todos->lastPage(); $i++)
+                    <li class="page-item {{ $i == $todos->currentPage() ? 'active' : '' }}">
+                        <a class="page-link" href="{{ $todos->url($i) }}">{{ $i }}</a>
+                    </li>
+                    @endfor
+
+                    @if ($todos->hasMorePages())
+                    <li class="page-item">
+                        <a class="page-link" href="{{ $todos->nextPageUrl() }}">Next</a>
+                    </li>
+                    @else
+                    <li class="page-item disabled">
+                        <span class="page-link">Next</span>
+                    </li>
+                    @endif
+            </ul>
+        </nav>
     </div>
 </div>
 @endsection

@@ -23,9 +23,6 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('login') }}">Login</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('register') }}">Register</a>
-                </li>
                 @endguest
 
                 @auth
@@ -34,7 +31,7 @@
                 </li>
                 @if(auth()->user()->is_admin)
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('generate.view') }}">Generate Token</a>
+                    <a class="nav-link" href="{{ route('generate') }}">Generate Token</a>
                 </li>
                 @endif
                 <li class="nav-item">
@@ -61,16 +58,17 @@
         <div class="alert alert-danger">
             {{ session('error') }}
         </div>
-    @endif
+        @endif
 
 
         @if ($errors->any())
-        <div >
+        <div>
             {{-- <ul> --}}
                 @foreach ($errors->all() as $error)
                 <li class="alert alert-danger">{{ $error }}</li>
                 @endforeach
-            {{-- </ul> --}}
+                {{--
+            </ul> --}}
         </div>
         @endif
 

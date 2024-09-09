@@ -4,7 +4,7 @@
 <div class="container">
     <h1 class="mt-5">User Invite Token</h1>
 
-    <form action="{{ route('generate.token') }}" method="POST" class="my-3">
+    <form action="{{ route('generate') }}" method="POST" class="my-3">
         @csrf
         <div class="row">
             <span class="col-10">

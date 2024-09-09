@@ -3,19 +3,22 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\TodoController;
+use App\Actions\TokenManagementAction;
+use App\Actions\RegisterTokenAction;
+use App\Actions\LoginAction;
+
 // use App\Http\Middleware\CheckAdmin;
 
+
+// Show registration form and handle registration
 
 
 Route::get('/', function () {
     return redirect('/login');
 });
 
-// LOGIN
-Route::post('/login', [AuthController::class, 'login']);
-Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
-Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
-Route::post('/register', [AuthController::class, 'register'])->name('register-form');
+Route::match(['get', 'post'], '/login', [LoginAction::class, 'handle'])->name('login');
+Route::match(['get', 'post'], '/register', [RegisterTokenAction::class, 'handle'])->name('register');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::middleware('auth')->group(function () {
@@ -30,10 +33,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/{todo}', [TodoController::class, 'destroy'])->name('delete');
     });
 
-    // GENERATE Routes
-    Route::prefix('generate')->name('generate.')->group(function () {
-        Route::get('/', [AuthController::class, 'generateTokenView'])->name('view');
-        Route::post('/token', [AuthController::class, 'generateToken'])->name('token');
-    });
+    // Laravel action
+    Route::match(['get', 'post'], '/generate', [TokenManagementAction::class, 'handle'])->name('generate');
+
 
 });
